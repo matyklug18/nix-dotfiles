@@ -157,12 +157,11 @@ in {
     };
     packages = with pkgs.python38Packages; with pkgs; [
       #_pkg_
-poppler_utils
-
-bc
-calibre
-okular
-qbittorrent
+      poppler_utils
+      bc
+      calibre
+      okular
+      qbittorrent
       expect
       github-cli
       networkmanagerapplet
