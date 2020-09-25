@@ -197,7 +197,7 @@ qbittorrent
       blender
       flameshot
       firefox
-      master.discord
+      discord
       kitty
       comma
       nix-index
