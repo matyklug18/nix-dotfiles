@@ -28,6 +28,8 @@ in {
 			enableCompletion = false;
 			shellAliases = cfg.shellAliases;
 			initExtra = "
+				source ~/.config/zsh/.zinit/bin/zinit.zsh
+
 				if [[ ! -f $HOME/.config/zsh/.zinit/bin/zinit.zsh ]]; then
 						print -P \"%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f\"
 						command mkdir -p \"$HOME/.config/zsh/.zinit\" && command chmod g-rwX \"$HOME/.config/zsh/.zinit\"
@@ -39,10 +41,12 @@ in {
 				if [[ ! -f $HOME/.p10k.zsh ]]; then
 					expect -c '
 					set timeout -1
-					spawn zsh
+					spawn zsh -f
+					send -- \"INSIDE_P10K=yes\\r\"
+					send -- \"source ~/.zshrc\\r\"
 					send -- \"p10k configure\\r\"
 					send -- \"yyyy3121342214121y1y\\r\"
-					send -- \"touch exit.tmp\"
+					send -- \"touch exit.tmp\\r\"
 					send -- \"exit\\r\"
 					expect eof
 					' & while true; do; if [[ -t \"exit.tmp\" ]]; then; kill $1; rm exit.tmp; fi; done;
@@ -51,7 +55,6 @@ in {
 				${
 					if cfg.p10k.enable then
 						"
-						source ~/.zinit/bin/zinit.zsh
 
 						zinit ice depth=1; zinit light romkatv/powerlevel10k
 						if [[ -r \"\${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-\${(%):-%n}.zsh\" ]]; then
