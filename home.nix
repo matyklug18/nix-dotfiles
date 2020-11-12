@@ -23,6 +23,7 @@ in {
   imports = [
     ./modules/nvimgen.nix
     ./modules/zshgen.nix
+    ./modules/awesomewmgen.nix
   ];
 
   fonts.fontconfig.enable = true;
@@ -74,7 +75,6 @@ in {
         };
         buildInputs = oldAttrs.buildInputs ++ (with super; [ harfbuzz ]);
       }))
-
       skypeforlinux
       docker
       joypixels
@@ -331,7 +331,15 @@ in {
         ultisnips
         polyglot
         nerdtree
+        (gitvim "skywind3000/asyncrun.vim")
       ];
+      postExtra = ''
+        fu! TexCompile()
+          :!context %
+          :AsyncRun okular %:r.pdf
+        endf
+        command! TexCompile call TexCompile()
+      '';
     };
 
     zshgen = {
@@ -351,6 +359,10 @@ in {
         clear = "printf '\\033[2J\\033[3J\\033[1;1H'; kitty +kitten icat --clear";
         ff    = "firefox";
       };
+    };
+
+    awesomewmgen = {
+      enable = true;
     };
   };
 
