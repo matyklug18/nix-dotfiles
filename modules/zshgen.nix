@@ -38,31 +38,31 @@ in {
 								print -P \"%F{160}▓▒░ The clone has failed.%f%b\"
 				fi
 
-				if [[ ! -f $HOME/.p10k.zsh ]]; then
-					expect -c '
-					set timeout -1
-					spawn zsh -f
-					send -- \"INSIDE_P10K=yes\\r\"
-					send -- \"source ~/.zshrc\\r\"
-					send -- \"p10k configure\\r\"
-					send -- \"yyyy3121342214121y1y\\r\"
-					send -- \"touch exit.tmp\\r\"
-					send -- \"exit\\r\"
-					expect eof
-					' & while true; do; if [[ -t \"exit.tmp\" ]]; then; kill $1; rm exit.tmp; fi; done;
-				fi;
+
 
 				${
 					if cfg.p10k.enable then
 						"
-
+						POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 						zinit ice depth=1; zinit light romkatv/powerlevel10k
 						if [[ -r \"\${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-\${(%):-%n}.zsh\" ]]; then
 							source \"\${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-\${(%):-%n}.zsh\"    
 						fi
 
-						# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 						[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+						if [[ ! -f $HOME/.p10k.zsh ]]; then
+							touch .p10k.zsh
+							expect -c '
+								set timeout -1
+								spawn zsh -f
+								send -- \"source ~/.zshrc\\r\"
+								send -- \"p10k configure\\r\"
+								send -- \"yyyy3123342214121y1y\\r\"
+								send -- \"exit\\r\"
+								expect eof
+							'
+						fi
 						"
 					else ""
 				}

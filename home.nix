@@ -97,7 +97,7 @@ in {
       aseprite-unfree
       jetbrains.idea-community
       transmission
-      texlive.combined.scheme-full
+      #texlive.combined.scheme-full
       calibre
       unzip
       zip
@@ -147,6 +147,7 @@ in {
       firefox
       discord
       lightcord
+      goosemod-discord
       kitty
       nix-index
       topgrade
