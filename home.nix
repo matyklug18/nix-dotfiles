@@ -75,6 +75,8 @@ in {
         };
         buildInputs = oldAttrs.buildInputs ++ (with super; [ harfbuzz ]);
       }))
+      fzf
+      tree
       skypeforlinux
       docker
       joypixels
@@ -97,6 +99,7 @@ in {
       aseprite-unfree
       jetbrains.idea-community
       transmission
+      #texlive.combined.scheme-context
       #texlive.combined.scheme-full
       calibre
       unzip
@@ -329,15 +332,14 @@ in {
       };
       plugins = with pkgs.vimPlugins; [
         gitgutter
-        ultisnips
+        #ultisnips
         polyglot
         nerdtree
-        (gitvim "skywind3000/asyncrun.vim")
+        #(gitvim "skywind3000/asyncrun.vim")
       ];
       postExtra = ''
         fu! TexCompile()
-          :!context %
-          :AsyncRun okular %:r.pdf
+          :AsyncRun context % && okular %:r.pdf
         endf
         command! TexCompile call TexCompile()
       '';
@@ -363,7 +365,7 @@ in {
     };
 
     awesomewmgen = {
-      enable = true;
+      #enable = true;
     };
   };
 
