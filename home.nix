@@ -170,7 +170,7 @@ in {
       enable = true;
     };
     picom = {
-      enable = true;
+      enable = false;
       package = pkgs.picom.overrideAttrs (old: {
         src = builtins.fetchTarball {
           url = "https://github.com/ibhagwan/picom/archive/next.tar.gz";
@@ -332,10 +332,10 @@ in {
       };
       plugins = with pkgs.vimPlugins; [
         gitgutter
-        #ultisnips
-        polyglot
+        ultisnips
         nerdtree
-        #(gitvim "skywind3000/asyncrun.vim")
+        surround
+        fzf-vim
       ];
       postExtra = ''
         fu! TexCompile()
@@ -383,11 +383,11 @@ in {
       };
       bars = [];
       gaps = {
-        smartBorders = "on";
-        smartGaps = true;
+        #smartBorders = "on";
+        #smartGaps = true;
 
-        inner = 25;
-        outer = 25;
+        #inner = 25;
+        #outer = 25;
       };
     };
   };

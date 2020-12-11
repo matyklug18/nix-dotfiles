@@ -86,5 +86,16 @@
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "Hack" "Meslo" "JetBrainsMono" ]; })
   ];
+
+  ###############################
+  ## Input Method Editor (IME) ##
+  ###############################
+
+  # This enables "fcitx" as your IME.  This is an easy-to-use IME.  It supports many different input methods.
+  i18n.inputMethod.enabled = "fcitx";
+
+  # This enables "mozc" as an input method in "fcitx".  This has a relatively
+  # complete dictionary.  I recommend it for Japanese input.
+  i18n.inputMethod.fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
 }
 
